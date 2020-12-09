@@ -11,13 +11,15 @@
 |
 */
 
-Route::get('/', 'HomePageController@index');
+Route::get('/', 'HomePageController@index')->name('home.page');
 Route::get('/products', 'HomePageController@products')->name('product.list');
 Route::get('/products-category/{slug}', 'HomePageController@category_products')->name('category.product');
 Route::get('/products-brand/{slug}', 'HomePageController@brand_products')->name('brand.product');
 Route::get('/product-{slug}', 'HomePageController@product_details')->name('product.detail');
 Route::post('/find-product', 'HomePageController@findProduct')->name('find.products');
 Route::get('/get-product', 'HomePageController@getProduct')->name('get.product');
+Route::get('/about', 'HomePageController@about')->name('about.page');
+Route::get('/contact', 'HomePageController@contact')->name('contact.page');
 
 //cart route
 Route::post('/cart/add/{id}', 'CartController@add_cart')->name('cart.add');
@@ -66,6 +68,7 @@ Auth::routes();
 
 
 Route::group(['middleware' => ['auth','admin']],function(){
+
 
 	Route::get('/dashboard', 'HomeController@index')->name('home');
 	Route::prefix('/user')->group(function(){
@@ -164,6 +167,15 @@ Route::group(['middleware' => ['auth','admin']],function(){
 		Route::get('/approve/list','Admin\OrderController@approve_order_list')->name('order.approve.list');
 		Route::get('/detail/{id}','Admin\OrderController@detail')->name('order.detail');
 		Route::get('/approve/{id}','Admin\OrderController@approve')->name('order.approve');
+
+
+	});
+
+	Route::prefix('/customer')->group(function(){
+
+		Route::get('/list','Admin\CustomerController@index')->name('customer.list');
+		Route::get('/draft/list','Admin\CustomerController@draft')->name('customer.draft.list');
+		Route::get('/delete/{id}','Admin\CustomerController@delete')->name('customer.delete');
 
 
 	});

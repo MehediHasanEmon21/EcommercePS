@@ -67,4 +67,16 @@ class HomePageController extends Controller
           return response()->json($html);
 
      }
+
+     public function about(){
+
+        return view('frontend.about');
+
+     }
+
+     public function contact(){
+
+        return view('frontend.contact');
+
+     }
 }

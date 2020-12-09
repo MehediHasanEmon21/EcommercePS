@@ -2,6 +2,10 @@
 
 @section('title', 'Home')
 
+@php
+    $route = $route = Route::current()->getName();
+    @endphp
+
 @section('content')
 
     @include('frontend.include.slider')

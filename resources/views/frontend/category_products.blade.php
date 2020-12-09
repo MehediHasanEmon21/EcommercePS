@@ -3,11 +3,14 @@
 @section('title', 'Products')
 
 @section('content')
+@php
+$url = Request::url();
 
+@endphp
 
-	<section class="bg-img1 txt-center p-lr-15 p-tb-92" style="background-image: url('public/assets/frontend/images/bg-01.jpg');">
+	<section class="bg-img1 txt-center p-lr-15 p-tb-92" style="background-image: url('../public/assets/frontend/images/bg-01.jpg');">
 		<h2 class="ltext-105 cl0 txt-center">
-			Category Wise Product
+			Category Wise Product 
 		</h2>
 	</section>	
 
@@ -16,12 +19,12 @@
 		<div class="container">
 			<div class="flex-w flex-sb-m p-b-52">
 				<div class="flex-w flex-l-m filter-tope-group m-tb-10">
-					<a href="{{ route('product.list') }}" class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1" data-filter="*">
+					<a href="{{ route('product.list') }}" class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter="*">
 						All Products
 					</a>
 					
 					@foreach($categories as $cat)
-					<a href="{{ route('category.product',$cat->category->slug) }}" class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5">
+					<a href="{{ route('category.product',$cat->category->slug) }}" class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 {{ ($url == route('category.product',$cat->category->slug)) ? 'how-active1' : '' }}">
 						{{$cat->category->name}}
 					</a>
 					@endforeach

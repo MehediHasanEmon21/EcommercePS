@@ -1,3 +1,8 @@
+	
+	@php
+	$route = $route = Route::current()->getName();
+	@endphp
+
 	<!-- Header -->
 	<header class="header-v4">
 		<!-- Header desktop -->
@@ -37,10 +42,10 @@
 					<!-- Menu desktop -->
 					<div class="menu-desktop">
 						<ul class="main-menu">
-	                        <li class="active-menu">
+	                        <li class="{{ ($route == 'home.page') ? 'active-menu' : '' }}">
 	                            <a href="{{ url('/') }}">HOME</a>
 	                        </li>
-	                        <li class="active-menu">
+	                        <li class="{{ ($route == 'product.list') ? 'active-menu' : '' }}">
 	                            <a href="#">SHOPS</a>
 	                            <ul class="sub-menu">
 	                                <li><a href="{{ route('product.list') }}">Products</a></li>
@@ -48,13 +53,13 @@
 	                                <li><a href="">Cart</a></li>
 	                            </ul>
 	                        </li>
-	                        <li>
-	                            <a href="">ABOUT US</a>
+	                        <li class="{{ ($route == 'about.page') ? 'active-menu' : '' }}">
+	                            <a href="{{route('about.page')}}">ABOUT US</a>
 	                        </li>
-	                        <li>
-	                            <a href="contact.html">CONTACT US</a>
+	                        <li class="{{ ($route == 'contact.page') ? 'active-menu' : '' }}">
+	                            <a href="{{route('contact.page')}}">CONTACT US</a>
 	                        </li>
-							@if(Auth::check())
+							@if(Auth::check() && @Auth::user()->userType == 'customer')
 							<li class="active-menu">
 	                            <a href="#">ACCOUNTS</a>
 	                            <ul class="sub-menu">
@@ -134,11 +139,11 @@
 			</ul>
 
 			<ul class="main-menu-m">
-				<li><a href="index.html">Home</a></li>
-				<li>
-					<a href="">SHOPS</a>
+				<li class="{{ ($route == 'home.page') ? 'active-menu' : '' }}"><a href="{{url('/')}}">Home</a></li>
+				<li class="{{ ($route == 'product.list') ? 'active-menu' : '' }}">
+					<a href="#">SHOPS</a>
 					<ul class="sub-menu-m">
-						<li><a href="">Products</a></li>
+						<li><a href="{{ route('product.list') }}">Products</a></li>
                         <li><a href="">Checkout</a></li>
                         <li><a href="shoping-cart.html">Cart</a></li>
 					</ul>
@@ -146,13 +151,13 @@
 						<i class="fa fa-angle-right" aria-hidden="true"></i>
 					</span>
 				</li>
-				<li>
-                    <a href="">ABOUT US</a>
+				<li class="{{ ($route == 'about.page') ? 'active-menu' : '' }}">
+                    <a href="{{ route('about.page') }}">ABOUT US</a>
                 </li>
-                <li>
-                    <a href="contact.html">CONTACT US</a>
+                <li class="{{ ($route == 'contact.page') ? 'active-menu' : '' }}">
+                    <a href="{{route('contact.page')}}">CONTACT US</a>
                 </li>
-                @if(Auth::check())
+                @if(Auth::check() && @Auth::user()->userType == 'customer')
                 	<li class="active-menu">
                         <a href="#">ACCOUNTS</a>
                         <ul class="sub-menu">
